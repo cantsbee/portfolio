@@ -93,6 +93,27 @@ document.querySelectorAll('.soft-skill-card').forEach(card => {
     softSkillsObserver.observe(card);
 });
 
+// Animación de entrada para los elementos de timeline (formación y experiencia)
+const timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateX(0)';
+            }, index * 150);
+        }
+    });
+}, {
+    threshold: 0.1
+});
+
+document.querySelectorAll('.timeline-item').forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateX(-30px)';
+    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    timelineObserver.observe(item);
+});
+
 // Animación de entrada para las estadísticas
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
