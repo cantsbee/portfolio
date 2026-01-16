@@ -72,6 +72,27 @@ document.querySelectorAll('.project-card').forEach(card => {
     projectObserver.observe(card);
 });
 
+// Animación de entrada para las tarjetas de soft skills
+const softSkillsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, index * 80);
+        }
+    });
+}, {
+    threshold: 0.1
+});
+
+document.querySelectorAll('.soft-skill-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    softSkillsObserver.observe(card);
+});
+
 // Animación de entrada para las estadísticas
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
